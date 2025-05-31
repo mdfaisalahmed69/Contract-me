@@ -26,7 +26,7 @@
       border-radius: 12px;
       width: 90%;
       max-width: 600px;
-      margin: 0 auto 15px auto;
+      margin: 15px auto;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .gallery {
@@ -42,7 +42,7 @@
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       text-align: center;
-      width: calc(50% - 20px);
+      width: calc(50% - 20px); /* For larger screens */
       max-width: 300px;
       transition: transform 0.3s;
     }
@@ -73,23 +73,39 @@
     .card button:hover {
       background-color: #0056b3;
     }
+
+    header > iframe,
+    footer > iframe {
+      max-width: 100%;
+      height: 90px;
+      display: block !important;
+      margin: 0 auto !important;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    .social-bar-container {
+      text-align: center;
+      margin-top: 20px;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .social-bar-container iframe {
+        max-width: 100% !important;
+    }
+
     @media (max-width: 600px) {
       .card {
-        width: 100%;
+        width: calc(50% - 7.5px);
       }
       .site-title {
         font-size: 20px;
       }
     }
-    .social-bar-container {
-      text-align: center;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Top Banner Ad -->
   <header>
     <script type="text/javascript">
       atOptions = {
@@ -104,7 +120,6 @@
     <div class="site-title">তোমার পছন্দের বন্ধু খুঁজে নাও এখান থেকে</div>
   </header>
 
-  <!-- Gallery Section -->
   <div class="gallery">
     <script>
       const images = [
@@ -118,16 +133,28 @@
         "https://i.imgur.com/KtCylpb.jpeg", "https://i.imgur.com/h5f7AHk.jpeg"
       ];
 
-      const shareText = encodeURIComponent("তুমি এই বন্ধুদের গ্যালারি একবার দেখো!");
-      const shareUrl = encodeURIComponent(window.location.href);
+      const shareMessage = "তুমি এই বন্ধুদের গ্যালারি একবার দেখো!"; // শেয়ার করার জন্য বার্তা
+      const siteUrlToShare = "https://contract-me-tau.vercel.app/"; // আপনার নির্দিষ্ট সাইটের লিঙ্ক
+      const encodedSiteUrlToShareForFacebook = encodeURIComponent(siteUrlToShare); // ফেসবুকের জন্য লিঙ্ক এনকোড করা
 
-      images.forEach(url => {
+      images.forEach(imgSrcUrl => {
         document.write(`
           <div class="card">
-            <img src="${url}" alt="Gallery Image" />
+            <img src="${imgSrcUrl}" alt="Gallery Image" />
             <div class="buttons">
               <button onclick="window.location.href='https://www.profitableratecpm.com/vx10bybinx?key=1f77b1e252449e960ab54f14986a3bf0'">Message Me</button>
-              <button onclick="navigator.share ? navigator.share({ title: 'বন্ধুদের গ্যালারি', text: '${shareText}', url: '${shareUrl}' }) : window.open('https://www.facebook.com/sharer/sharer.php?u=${shareUrl}', '_blank')">Share</button>
+              <button onclick="
+                if (navigator.share) {
+                  navigator.share({
+                    title: 'বন্ধুদের গ্যালারি',
+                    text: '${shareMessage}',
+                    url: '${siteUrlToShare}'
+                  }).then(() => console.log('Successful share'))
+                    .catch((error) => console.log('Error sharing', error));
+                } else {
+                  window.open('https://www.facebook.com/sharer/sharer.php?u=${encodedSiteUrlToShareForFacebook}&quote=${encodeURIComponent(shareMessage)}', '_blank');
+                }
+              ">Share</button>
             </div>
           </div>
         `);
@@ -135,7 +162,6 @@
     </script>
   </div>
 
-  <!-- Bottom Banner Ad -->
   <footer>
     <script type="text/javascript">
       atOptions = {
@@ -149,7 +175,6 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/d7cb6664167224c94ee810035edb2a86/invoke.js"></script>
   </footer>
 
-  <!-- Social Bar Ads -->
   <div class="social-bar-container">
     <script type='text/javascript' src='https://pl26714657.profitableratecpm.com/dd/8b/91/dd8b9111eff0f5fdf1325bc01444696f.js'></script>
   </div>
